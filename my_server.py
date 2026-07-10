@@ -12,7 +12,32 @@ DB_URL = os.getenv("DATABASE_URL")
 mcp = FastMCP("Simple-PostgreSQL")
 
 
-@mcp.tool()
+@mcp.tool(
+    name="select_records",
+    description="""This tool lets you run SQL queries on a connected PostgreSQL database.
+
+Use it for:
+- Looking up records by ID, status, date ranges, or specific column values
+- Running calculations like COUNT, SUM, AVG, or GROUP BY
+- Joining multiple tables
+- Sorting or filtering data
+- Accessing transaction data, user records, system logs
+
+Do NOT use it for:
+- Natural language / semantic search — use similarity_search instead
+- Finding topics, themes, or concepts in text — use similarity_search instead
+
+Good examples:
+- "How many orders were placed last week?"
+- "Show all users with status = 'active'"
+- "Average order value grouped by region"
+
+Bad examples:
+- "Find documents about database performance" → use similarity_search
+- "Show tickets related to connection issues" → use similarity_search
+
+Important: Results are capped. Use LIMIT parameter (default 100, start with 10 when exploring).""",
+)
 def query_db(sql_query: str) -> str:
     """Run a safe SELECT SQL query on the PostgreSQL database."""
     # Validate connection string is configured
