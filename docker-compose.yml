@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+  mcp-server:
+    build: .
+    container_name: mcp-server
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:secret@host.docker.internal:5435/census
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

@@ -1,0 +1,10 @@
+mcp[cli]
+fastmcp
+psycopg2-binary
+psycopg-binary
+python-dotenv
+uvicorn
+uv
+httpx
+asyncpg
+psycopg
