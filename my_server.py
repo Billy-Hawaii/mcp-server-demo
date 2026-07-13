@@ -38,14 +38,28 @@ def query_db(sql_query: str) -> str:
         return f"Database error: {str(e)}"
 
 @mcp.prompt
-def analyze_code(code: str, language: str = "python") -> str:
-    """Analyze code for potential issues."""
-    return f"Analyze this {language} code:\n{code}"
+def analyze_schema() -> str:
+    """Generate a prompt to explore the current database schema."""
+    return (
+        "You are connected to a PostgreSQL database. "
+        "List all tables and their columns by running:\n\n"
+        "SELECT table_name, column_name, data_type\n"
+        "FROM information_schema.columns\n"
+        "WHERE table_schema = 'public'\n"
+        "ORDER BY table_name, ordinal_position;"
+    )
 
 @mcp.prompt
-def explain_concept(concept: str) -> str:
-    """Explain a programming concept."""
-    return f"Explain: {concept}"
+def explain_query(task: str) -> str:
+    """Generate a prompt that guides the LLM to write a safe SELECT query for a given task."""
+    return (
+        f"Write a safe read-only SELECT query for the following task:\n\n{task}\n\n"
+        "Rules:\n"
+        "- Use only SELECT statements (no INSERT, UPDATE, DELETE, DROP, ALTER)\n"
+        "- Use the analyze_schema prompt first to discover available tables and columns\n"
+        "- Use LIMIT to cap results (default 100, start with 10 when exploring)\n"
+        "- If you need to search text content, use similarity_search instead of WHERE with LIKE"
+    )
 
 # Add the transform - creates list_prompts and get_prompt tools
 mcp.add_transform(PromptsAsTools(mcp))
