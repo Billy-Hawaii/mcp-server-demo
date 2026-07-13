@@ -145,13 +145,13 @@ def search_db(keywords: str, table_name: str = "", limit: int = 10) -> str:
 
 @mcp.prompt
 def housing_units_owner_occupied() -> str:
-    """Show top 5 housing units where owner_occupied is true."""
-    return "query the following  information 'Show top 5 housing units where owner_occupied is true.'using mcp tool query_db"
+    """Show top x housing units where owner_occupied is true."""
+    return "query the following  information 'Show top {{number}} housing units where owner_occupied is 1.'using mcp tool query_db"
 
 @mcp.prompt
-def geoheader_area_type_is_OA() -> str:
-    """Show top 10 geoheader records where area_type is OA."""
-    return "query the following  information 'Show top 10 geoheader records where area_type is OA.'using mcp tool query_db"
+def geoheader_by_area_type() -> str:
+    """Show top 10 geoheader records by area_type."""
+    return "query the following  information 'Show top 10 geoheader records where area_type is {{type}}.'using mcp tool query_db"
 
 # Add the transform - creates list_prompts and get_prompt tools
 mcp.add_transform(PromptsAsTools(mcp))
