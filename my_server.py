@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from fastmcp import FastMCP
 from fastmcp.prompts import Message
 from fastmcp.server.transforms import PromptsAsTools
+from fastmcp.server.transforms import ResourcesAsTools
 # Load database environment credentials
 load_dotenv()
 DB_URL = os.getenv("DATABASE_URL")
@@ -155,6 +156,19 @@ def geoheader_by_area_type() -> str:
 
 # Add the transform - creates list_prompts and get_prompt tools
 mcp.add_transform(PromptsAsTools(mcp))
+
+@mcp.resource("config://app")
+def app_config() -> str:
+    """Application configuration."""
+    return '{"app_name": "My App", "version": "1.0.0"}'
+
+@mcp.resource("user://{user_id}/profile")
+def user_profile(user_id: str) -> str:
+    """Get a user's profile by ID."""
+    return f'{{"user_id": "{user_id}", "name": "User {user_id}"}}'
+
+# Add the transform - creates list_resources and read_resource tools
+mcp.add_transform(ResourcesAsTools(mcp))
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=8000)
