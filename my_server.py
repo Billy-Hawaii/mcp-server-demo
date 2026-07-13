@@ -5,6 +5,7 @@ import psycopg
 from dotenv import load_dotenv
 from fastmcp import FastMCP
 from fastmcp.prompts import Message
+from fastmcp.server.transforms import PromptsAsTools
 # Load database environment credentials
 load_dotenv()
 DB_URL = os.getenv("DATABASE_URL")
@@ -36,36 +37,18 @@ def query_db(sql_query: str) -> str:
     except Exception as e:
         return f"Database error: {str(e)}"
 
-# Basic prompt returning a string (converted to user message automatically)
 @mcp.prompt
-def ask_about_topic(topic: str) -> str:
-    """Generates a user message asking for an explanation of a topic."""
-    return f"Can you please explain the concept of '{topic}'?"
+def analyze_code(code: str, language: str = "python") -> str:
+    """Analyze code for potential issues."""
+    return f"Analyze this {language} code:\n{code}"
 
-# Prompt returning multiple messages
 @mcp.prompt
-def generate_code_request(language: str, task_description: str) -> list[Message]:
-    """Generates a conversation for code generation."""
-    return [
-        Message(f"Write a {language} function that performs the following task: {task_description}"),
-        Message("I'll help you write that function.", role="assistant"),
-    ]
+def explain_concept(concept: str) -> str:
+    """Explain a programming concept."""
+    return f"Explain: {concept}"
 
-# Basic dynamic resource returning a string
-@mcp.resource("resource://greeting")
-def get_greeting() -> str:
-    """Provides a simple greeting message."""
-    return "Hello from FastMCP Resources!"
-
-# Resource returning JSON data
-@mcp.resource("data://config")
-def get_config() -> str:
-    """Provides application configuration as JSON."""
-    return json.dumps({
-        "theme": "dark",
-        "version": "1.2.0",
-        "features": ["tools", "resources"],
-    })
+# Add the transform - creates list_prompts and get_prompt tools
+mcp.add_transform(PromptsAsTools(mcp))
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=8000)
