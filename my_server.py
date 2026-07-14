@@ -1,6 +1,7 @@
 import json
 import os
 
+import aiofiles
 import psycopg
 from dotenv import load_dotenv
 from fastmcp import FastMCP
@@ -157,6 +158,15 @@ def geoheader_by_area_type() -> str:
 # Add the transform - creates list_prompts and get_prompt tools
 mcp.add_transform(PromptsAsTools(mcp))
 
+@mcp.resource("file:///app/data/census_data_dictionary.csv")
+async def get_census_data_dictionary() -> str:
+    """Provides the Census Data Dictionary in CSV format."""
+    try:
+        async with aiofiles.open("data/census_data_dictionary.csv", mode="r", encoding="utf-8") as f:
+            return await f.read()
+    except FileNotFoundError:
+        return "Error: File not found."
+
 @mcp.resource("config://app")
 def app_config() -> str:
     """Application configuration."""
@@ -166,6 +176,7 @@ def app_config() -> str:
 def user_profile(user_id: str) -> str:
     """Get a user's profile by ID."""
     return f'{{"user_id": "{user_id}", "name": "User {user_id}"}}'
+
 
 # Add the transform - creates list_resources and read_resource tools
 mcp.add_transform(ResourcesAsTools(mcp))

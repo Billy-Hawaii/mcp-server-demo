@@ -11,9 +11,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
+# Copy application code and data
 COPY my_server.py .
 COPY .env .env
+COPY data/ ./data/
 
 # Expose the MCP server port
 EXPOSE 8000
