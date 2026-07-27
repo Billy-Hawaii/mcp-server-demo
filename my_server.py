@@ -1,7 +1,7 @@
 import json
 import os
 from statistics import mean, median, mode, stdev, StatisticsError
-
+from pathlib import Path
 import aiofiles
 import psycopg
 from dotenv import load_dotenv
@@ -282,7 +282,7 @@ def compute_stats(json_results: str, column: str = "") -> str:
 
     return "\n".join(output_parts)
 
-@mcp.resource("file:///data/21C_Codeset.json")
+@mcp.resource("file:///data/21C_Codeset.json", mime_type="application/json")
 async def get_21C_data_Dictionary() -> str:
     """Provides the 2021 Hong Kong Population Census codeset dictionary in JSON format with 8,230 records across 354 unique code sets (e.g., [ACTIV], [AGE], [BORNPL], [OCCUP], [INDUST], etc.). Each record maps census codes to English/Chinese labels."""
     file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "21C_Codeset.json")
@@ -291,6 +291,8 @@ async def get_21C_data_Dictionary() -> str:
             return await f.read()
     except FileNotFoundError:
         return f"Error: File not found at path: {file_path}"
+
+
 
 
 # Add the transform - creates list_resources and read_resource tools
