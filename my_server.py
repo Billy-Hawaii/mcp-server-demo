@@ -282,46 +282,19 @@ def compute_stats(json_results: str, column: str = "") -> str:
 
     return "\n".join(output_parts)
 
-
-@mcp.prompt
-def housing_units_owner_occupied() -> str:
-    """Show top x housing units where owner_occupied is true."""
-    return "query the following  information 'Show top {{number}} housing units where owner_occupied is 1.'using mcp tool query_db"
-
-
-@mcp.prompt
-def geoheader_by_area_type() -> str:
-    """Show top 10 geoheader records by area_type."""
-    return "query the following  information 'Show top 10 geoheader records where area_type is {{type}}.'using mcp tool query_db"
+@mcp.resource("file:///data/21C_Codeset.json")
+async def get_21C_data_Dictionary() -> str:
+    """Provides the 2021 Hong Kong Population Census codeset dictionary in JSON format with 8,230 records across 354 unique code sets (e.g., [ACTIV], [AGE], [BORNPL], [OCCUP], [INDUST], etc.). Each record maps census codes to English/Chinese labels."""
+    file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data", "21C_Codeset.json")
+    try:
+        async with aiofiles.open(file_path, mode="r", encoding="utf-8") as f:
+            return await f.read()
+    except FileNotFoundError:
+        return f"Error: File not found at path: {file_path}"
 
 
-
-
-# Add the transform - creates list_prompts and get_prompt tools
-mcp.add_transform(PromptsAsTools(mcp))
-
-# @mcp.resource("file:///app/data/census_data_dictionary.csv")
-# async def get_census_data_dictionary() -> str:
-#     """Provides the Census Data Dictionary in CSV format."""
-#     try:
-#         async with aiofiles.open("data/census_data_dictionary.csv", mode="r", encoding="utf-8") as f:
-#             return await f.read()
-#     except FileNotFoundError:
-#         return "Error: File not found."
-
-# @mcp.resource("config://app")
-# def app_config() -> str:
-#     """Application configuration."""
-#     return '{"app_name": "My App", "version": "1.0.0"}'
-
-# @mcp.resource("user://{user_id}/profile")
-# def user_profile(user_id: str) -> str:
-#     """Get a user's profile by ID."""
-#     return f'{{"user_id": "{user_id}", "name": "User {user_id}"}}'
-
-
-# # Add the transform - creates list_resources and read_resource tools
-# mcp.add_transform(ResourcesAsTools(mcp))
+# Add the transform - creates list_resources and read_resource tools
+mcp.add_transform(ResourcesAsTools(mcp))
 
 if __name__ == "__main__":
     mcp.run(transport="http", host="0.0.0.0", port=8000)

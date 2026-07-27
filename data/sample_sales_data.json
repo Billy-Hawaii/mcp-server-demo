@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "product": "Laptop",
+    "category": "Electronics",
+    "region": "North",
+    "units_sold": 42,
+    "unit_price": 999.99,
+    "revenue": 41999.58,
+    "customer_rating": 4.5
+  },
+  {
+    "id": 2,
+    "product": "Mouse",
+    "category": "Electronics",
+    "region": "North",
+    "units_sold": 120,
+    "unit_price": 29.99,
+    "revenue": 3598.80,
+    "customer_rating": 4.2
+  },
+  {
+    "id": 3,
+    "product": "Keyboard",
+    "category": "Electronics",
+    "region": "South",
+    "units_sold": 85,
+    "unit_price": 79.99,
+    "revenue": 6799.15,
+    "customer_rating": 4.0
+  },
+  {
+    "id": 4,
+    "product": "Monitor",
+    "category": "Electronics",
+    "region": "South",
+    "units_sold": 30,
+    "unit_price": 349.99,
+    "revenue": 10499.70,
+    "customer_rating": 4.7
+  },
+  {
+    "id": 5,
+    "product": "Desk Chair",
+    "category": "Furniture",
+    "region": "East",
+    "units_sold": 55,
+    "unit_price": 249.99,
+    "revenue": 13749.45,
+    "customer_rating": 4.3
+  },
+  {
+    "id": 6,
+    "product": "Standing Desk",
+    "category": "Furniture",
+    "region": "East",
+    "units_sold": 20,
+    "unit_price": 599.99,
+    "revenue": 11999.80,
+    "customer_rating": 4.8
+  },
+  {
+    "id": 7,
+    "product": "USB-C Hub",
+    "category": "Electronics",
+    "region": "West",
+    "units_sold": 150,
+    "unit_price": 49.99,
+    "revenue": 7498.50,
+    "customer_rating": 3.9
+  },
+  {
+    "id": 8,
+    "product": "Webcam",
+    "category": "Electronics",
+    "region": "West",
+    "units_sold": 95,
+    "unit_price": 89.99,
+    "revenue": 8549.05,
+    "customer_rating": 4.1
+  },
+  {
+    "id": 9,
+    "product": "Bookshelf",
+    "category": "Furniture",
+    "region": "North",
+    "units_sold": 40,
+    "unit_price": 129.99,
+    "revenue": 5199.60,
+    "customer_rating": 4.4
+  },
+  {
+    "id": 10,
+    "product": "Desk Lamp",
+    "category": "Furniture",
+    "region": "North",
+    "units_sold": 110,
+    "unit_price": 39.99,
+    "revenue": 4398.90,
+    "customer_rating": 4.0
+  },
+  {
+    "id": 11,
+    "product": "Headphones",
+    "category": "Electronics",
+    "region": "South",
+    "units_sold": 70,
+    "unit_price": 149.99,
+    "revenue": 10499.30,
+    "customer_rating": 4.6
+  },
+  {
+    "id": 12,
+    "product": "Tablet",
+    "category": "Electronics",
+    "region": "East",
+    "units_sold": 35,
+    "unit_price": 449.99,
+    "revenue": 15749.65,
+    "customer_rating": 4.5
+  },
+  {
+    "id": 13,
+    "product": "Office Chair",
+    "category": "Furniture",
+    "region": "West",
+    "units_sold": 45,
+    "unit_price": 299.99,
+    "revenue": 13499.55,
+    "customer_rating": 4.2
+  },
+  {
+    "id": 14,
+    "product": "Printer",
+    "category": "Electronics",
+    "region": "East",
+    "units_sold": 25,
+    "unit_price": 199.99,
+    "revenue": 4999.75,
+    "customer_rating": 3.8
+  },
+  {
+    "id": 15,
+    "product": "Filing Cabinet",
+    "category": "Furniture",
+    "region": "West",
+    "units_sold": 15,
+    "unit_price": 179.99,
+    "revenue": 2699.85,
+    "customer_rating": 3.7
+  },
+  {
+    "id": 16,
+    "product": "Laptop Stand",
+    "category": "Electronics",
+    "region": "South",
+    "units_sold": 200,
+    "unit_price": 34.99,
+    "revenue": 6998.00,
+    "customer_rating": 4.3
+  },
+  {
+    "id": 17,
+    "product": "Whiteboard",
+    "category": "Furniture",
+    "region": "North",
+    "units_sold": 30,
+    "unit_price": 89.99,
+    "revenue": 2699.70,
+    "customer_rating": 4.1
+  },
+  {
+    "id": 18,
+    "product": "External SSD",
+    "category": "Electronics",
+    "region": "South",
+    "units_sold": 60,
+    "unit_price": 119.99,
+    "revenue": 7199.40,
+    "customer_rating": 4.7
+  },
+  {
+    "id": 19,
+    "product": "Ergonomic Mouse",
+    "category": "Electronics",
+    "region": "North",
+    "units_sold": 90,
+    "unit_price": 59.99,
+    "revenue": 5399.10,
+    "customer_rating": 4.4
+  },
+  {
+    "id": 20,
+    "product": "Cable Management Kit",
+    "category": "Furniture",
+    "region": "East",
+    "units_sold": 175,
+    "unit_price": 24.99,
+    "revenue": 4373.25,
+    "customer_rating": 3.6
+  }
+]
