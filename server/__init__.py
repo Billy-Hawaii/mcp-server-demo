@@ -9,7 +9,6 @@ DB_URL = os.getenv("DATABASE_URL")
 
 mcp = FastMCP("Simple-PostgreSQL")
 
-# Add the transform - creates list_resources and read_resource tools
 mcp.add_transform(ResourcesAsTools(mcp))
 
 

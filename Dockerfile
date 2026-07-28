@@ -13,6 +13,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code and data
 COPY my_server.py .
+COPY server/ ./server/
 COPY .env .env
 COPY data/ ./data/
 
