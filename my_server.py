@@ -293,6 +293,36 @@ async def get_21C_data_Dictionary() -> str:
         return f"Error: File not found at path: {file_path}"
 
 
+@mcp.tool()
+async def get_21C_codeset_list() -> str:
+    """Returns a list of all unique codesets from the 2021 Hong Kong Population Census data dictionary, including the codeset name, description, and record count. Each codeset (e.g., [ACTIV], [AGE], [BORNPL]) groups related census codes with English/Chinese labels."""
+    # Call the resource to get the raw JSON data
+    raw_json = await get_21C_data_Dictionary()
+
+    # If the resource returned an error string, pass it through
+    if raw_json.startswith("Error:"):
+        return raw_json
+
+    try:
+        records = json.loads(raw_json)
+    except json.JSONDecodeError as e:
+        return f"Error parsing JSON data: {e}"
+
+    # Build a summary of unique codesets
+    codeset_map = {}  # CodeSet -> {"Description": ..., "Count": int}
+    for record in records:
+        cs = record.get("CodeSet", "")
+        desc = record.get("Description", "")
+        if cs not in codeset_map:
+            codeset_map[cs] = {"code_set": cs, "description": desc, "record_count": 0}
+        codeset_map[cs]["record_count"] += 1
+
+    # Sort by codeset name
+    codeset_list = sorted(codeset_map.values(), key=lambda x: x["code_set"])
+
+    return json.dumps(codeset_list, indent=2, ensure_ascii=False)
+
+
 
 
 # Add the transform - creates list_resources and read_resource tools
